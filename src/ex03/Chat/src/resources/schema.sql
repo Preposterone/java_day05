@@ -1,17 +1,16 @@
--- DROP SCHEMA IF EXISTS chat CASCADE;
+DROP SCHEMA IF EXISTS chat CASCADE;
 
 CREATE SCHEMA IF NOT EXISTS chat;
 
-
 CREATE TABLE IF NOT EXISTS chat.users (
     id SERIAL PRIMARY KEY,
-    login text UNIQUE NOT NULL,
+    login text NOT NULL,
     password text NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS chat.rooms (
     id SERIAL PRIMARY KEY,
-    name TEXT UNIQUE NOT NULL,
+    name TEXT NOT NULL,
     owner INTEGER REFERENCES chat.users(id) NOT NULL
 );
 
