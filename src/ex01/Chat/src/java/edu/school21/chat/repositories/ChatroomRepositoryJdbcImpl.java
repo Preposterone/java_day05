@@ -29,16 +29,17 @@ public class ChatroomRepositoryJdbcImpl implements ChatroomRepository {
 			query.setLong(1, id);
 			resultSet = query.executeQuery();
 			resultSet.next();
-			ret = new Chatroom(
-					resultSet.getLong("id"),
-					resultSet.getString("name"),
-					userRepository.findById(resultSet.getLong("owner")).orElse(null),
-					new ArrayList<>()
-			);
-
+ 			if (resultSet.next()) {
+				ret = new Chatroom(
+						resultSet.getLong("id"),
+						resultSet.getString("name"),
+						userRepository.findById(resultSet.getLong("owner")).orElse(null),
+						new ArrayList<>()
+				);
+			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
-		return (Optional.of(ret));
+		return (Optional.ofNullable(ret));
 	}
 }

@@ -26,17 +26,18 @@ public class UserRepositoryJdbcImpl implements UserRepository {
 			PreparedStatement query = dataSource.prepareStatement(QUERY_TEMPLATE);
 			query.setLong(1, id);
 			resultSet = query.executeQuery();
-			resultSet.next();
-			ret = new User(
-					resultSet.getLong("id"),
-					resultSet.getString("login"),
-					resultSet.getString("password"),
-					new ArrayList<>(),
-					new ArrayList<>()
-			);
+			if (resultSet.next()) {
+				ret = new User(
+						resultSet.getLong("id"),
+						resultSet.getString("login"),
+						resultSet.getString("password"),
+						new ArrayList<>(),
+						new ArrayList<>()
+				);
+			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
-		return (Optional.of(ret));
+		return (Optional.ofNullable(ret));
 	}
 }

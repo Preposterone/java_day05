@@ -30,16 +30,18 @@ public class MessagesRepositoryJdbcImpl implements MessagesRepository {
 			query.setLong(1, id);
 			resultSet = query.executeQuery();
 			resultSet.next();
-			ret = new Message(
-					resultSet.getLong("id"),
-					userRepository.findById(resultSet.getLong("author")).orElse(null),
-					chatroomRepository.findById(resultSet.getLong("room")).orElse(null),
-					resultSet.getString("text"),
-					resultSet.getTimestamp("timestamp").toLocalDateTime()
-			);
+			if (resultSet.next()) {
+				ret = new Message(
+						resultSet.getLong("id"),
+						userRepository.findById(resultSet.getLong("author")).orElse(null),
+						chatroomRepository.findById(resultSet.getLong("room")).orElse(null),
+						resultSet.getString("text"),
+						resultSet.getTimestamp("timestamp").toLocalDateTime()
+				);
+			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
-		return (Optional.of(ret));
+		return (Optional.ofNullable(ret));
 	}
 }
