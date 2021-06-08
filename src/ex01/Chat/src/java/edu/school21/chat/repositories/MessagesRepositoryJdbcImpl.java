@@ -29,7 +29,6 @@ public class MessagesRepositoryJdbcImpl implements MessagesRepository {
 			PreparedStatement query = dataSource.prepareStatement(QUERY_TEMPLATE);
 			query.setLong(1, id);
 			resultSet = query.executeQuery();
-			resultSet.next();
 			if (resultSet.next()) {
 				ret = new Message(
 						resultSet.getLong("id"),

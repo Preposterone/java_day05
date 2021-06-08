@@ -28,7 +28,6 @@ public class ChatroomRepositoryJdbcImpl implements ChatroomRepository {
 			PreparedStatement query = dataSource.prepareStatement(QUERY_TEMPLATE);
 			query.setLong(1, id);
 			resultSet = query.executeQuery();
-			resultSet.next();
  			if (resultSet.next()) {
 				ret = new Chatroom(
 						resultSet.getLong("id"),
