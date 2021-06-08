@@ -1,5 +1,6 @@
 package edu.school21.chat.repositories;
 
+import edu.school21.chat.exceptions.NotSavedSubEntityException;
 import edu.school21.chat.models.Message;
 
 import java.sql.*;
@@ -47,14 +48,19 @@ public class MessagesRepositoryJdbcImpl implements MessagesRepository {
 
 		ResultSet resultSet = null;
 		try {
-			PreparedStatement query = dataSource.prepareStatement(QUERY_TEMPLATE);
-			query.setLong(1, message.getAuthor().getId());
-			query.setLong(2, message.getChatroom().getId());
-			query.setString(3, message.getText());
-			query.setTimestamp(4, Timestamp.valueOf(message.getMessageDateTime()));
-			resultSet = query.executeQuery();
-			resultSet.next();
-			message.setId(resultSet.getLong("id"));
+			if (userRepository.findById(message.getAuthor().getId()).isPresent()
+					&& chatroomRepository.findById(message.getChatroom().getId()).isPresent()) {
+				PreparedStatement query = dataSource.prepareStatement(QUERY_TEMPLATE);
+				query.setLong(1, message.getAuthor().getId());
+				query.setLong(2, message.getChatroom().getId());
+				query.setString(3, message.getText());
+				query.setTimestamp(4, Timestamp.valueOf(message.getMessageDateTime()));
+				resultSet = query.executeQuery();
+				resultSet.next();
+				message.setId(resultSet.getLong("id"));
+			} else {
+				throw new NotSavedSubEntityException();
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
