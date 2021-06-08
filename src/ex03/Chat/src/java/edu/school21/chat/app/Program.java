@@ -34,8 +34,6 @@ public class Program {
 		ChatroomRepositoryJdbcImpl chatRep = new ChatroomRepositoryJdbcImpl(connection, userRep);
 		MessagesRepository msgRep = new MessagesRepositoryJdbcImpl(connection, userRep, chatRep);
 
-		User creator = new User(2L, "user", "user", new ArrayList<>(), new ArrayList<>());
-		Chatroom room = new Chatroom(3L, "room", creator, new ArrayList<>());
 		Optional<Message> messageOptional = msgRep.findById(5L);
 		if (messageOptional.isPresent()) {
 			Message message = messageOptional.get();
