@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Objects;
 
 public class Chatroom {
-	private final List<Message> roomMessages;
 	private long id;
 	private String name;
 	private User owner;
+	private final List<Message> roomMessages;
 
 	public Chatroom(long id, String name, User owner, List<Message> roomMessages) {
 		this.id = id;
@@ -58,7 +58,7 @@ public class Chatroom {
 		return "Chatroom{" +
 				"id=" + id +
 				", name='" + name + '\'' +
-				", owner=" + owner.getLogin() +
+				", owner=" + owner +
 				", roomMessages=" + roomMessages +
 				'}';
 	}

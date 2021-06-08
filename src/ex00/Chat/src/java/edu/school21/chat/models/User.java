@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.Objects;
 
 public class User {
-	private final List<Chatroom> createdRooms;
-	private final List<Chatroom> rooms;
 	private long id;
 	private String login;
 	private String password;
+	private final List<Chatroom> createdRooms;
+	private final List<Chatroom> rooms;
 
 	public User(long id, String login, String password, List<Chatroom> createdRooms, List<Chatroom> rooms) {
 		this.id = id;

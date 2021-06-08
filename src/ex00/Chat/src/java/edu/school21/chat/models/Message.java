@@ -1,16 +1,15 @@
 package edu.school21.chat.models;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class Message {
 
-	private final LocalDateTime messageDateTime;
 	private long id;
 	private User author;
 	private Chatroom chatroom;
 	private String text;
+	private LocalDateTime messageDateTime;
 
 	public Message(long id, User author, Chatroom chatroom, String text, LocalDateTime messageDateTime) {
 		this.id = id;
@@ -67,12 +66,12 @@ public class Message {
 
 	@Override
 	public String toString() {
-		return "Message{\n" +
-				"\tid=" + id + ",\n" +
-				"\tauthor=" + author.toString() + ",\n" +
-				"\tchatroom=" + chatroom.toString() + ",\n" +
-				"\ttext=\"" + text + '\"' + ",\n" +
-				"\tmessageDateTime=" + messageDateTime.format(DateTimeFormatter.ofPattern("MM/MM/yy HH:mm")) +
-				"\n}";
+		return "Message{" +
+				"id=" + id +
+				", author=" + author +
+				", chatroom=" + chatroom +
+				", text='" + text + '\'' +
+				", messageDateTime=" + messageDateTime +
+				'}';
 	}
 }
