@@ -7,8 +7,8 @@ public class User {
 	private long id;
 	private String login;
 	private String password;
-	private final List<Chatroom> createdRooms;
-	private final List<Chatroom> rooms;
+	private List<Chatroom> createdRooms;
+	private List<Chatroom> rooms;
 
 	public User(long id, String login, String password, List<Chatroom> createdRooms, List<Chatroom> rooms) {
 		this.id = id;

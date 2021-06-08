@@ -27,17 +27,20 @@ public class Main {
 	public static Connection connect() {
 		Connection conn = null;
 		try {
+			Class.forName("org.postgresql.Driver");
 			conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PWD);
 			System.out.println("Connected to the PostgreSQL server successfully.");
-		} catch (SQLException e) {
+		} catch (SQLException e ) {
 			System.out.println(e.getMessage());
+		} catch (ClassNotFoundException e)	{
+			System.out.println("Class not found " + e.getMessage());
 		}
 		return conn;
 	}
 
 	public static void runQueriesFromFile(Connection connection, String filename) throws FileNotFoundException {
 		Scanner scanner = new Scanner(
-				new File(System.getProperty("user.dir") + "/src/ex00/Chat/src/main" + filename))
+				new File(System.getProperty("user.dir") + "/src/ex00/Chat/src/" + filename))
 				.useDelimiter(";");
 		try {
 			while (scanner.hasNext()) {

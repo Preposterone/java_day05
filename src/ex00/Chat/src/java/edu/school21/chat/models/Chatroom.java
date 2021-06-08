@@ -7,7 +7,7 @@ public class Chatroom {
 	private long id;
 	private String name;
 	private User owner;
-	private final List<Message> roomMessages;
+	private List<Message> roomMessages;
 
 	public Chatroom(long id, String name, User owner, List<Message> roomMessages) {
 		this.id = id;
