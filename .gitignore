@@ -58,3 +58,4 @@ out
 **/*.class
 **/result.txt
 **/target
+.DS_Store
